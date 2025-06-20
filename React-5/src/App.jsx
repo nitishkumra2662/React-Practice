@@ -1,4 +1,5 @@
-import { useState , useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link } from "react-router"
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,10 +9,11 @@ import UserAdd from './Component/UserAdd'
 import Form from './Component/Form'
 import UncontrolledForm from './Component/UncontrolledForm'
 import HookForm from './Component/HookForm'
+import HomePage from './Component/HomePage'
 
 function App() {
-  
-  const [usersData,setUsersData]=useState([]);
+
+  const [usersData, setUsersData] = useState([]);
   // const [count, setCount] = useState([0])
 
   // let name = "nitish Kumra";
@@ -44,16 +46,25 @@ function App() {
   //   </>
   // )
   return (
-    <>
-      <div>
-        {/* < Form /> */}
-        <HookForm/>
-        {/* <UncontrolledForm /> */}
-        {/* <UserData  setUsersData={setUsersData} usersData={usersData}/>
+    <BrowserRouter>
+
+      <>
+        <div>
+
+
+          
+          <Routes> <Route path='/hook-form' element={<HookForm />} />
+            <Route path='/uncontrolled' element={<UncontrolledForm />} />
+            <Route path='/form' element={< Form />} />
+            <Route path="/" element={<HomePage />}/>
+          </Routes>
+
+          {/* <UserData  setUsersData={setUsersData} usersData={usersData}/>
         <UserAdd setUsersData={setUsersData}/> */}
-      </div>
-      {/* <Todos /> */}
-    </>
+        </div>
+        {/* <Todos /> */}
+      </>
+    </BrowserRouter>
   )
 }
 

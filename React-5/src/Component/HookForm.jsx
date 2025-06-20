@@ -1,8 +1,10 @@
 import React from 'react'
-import { useForm } from "react-hook-form"
+import { useForm, } from "react-hook-form"
+import { useNavigate } from 'react-router';
 
 
 const HookForm = () => {
+    const navigate=useNavigate();
 
     const {
         register,
@@ -16,7 +18,15 @@ console.log(firstName);
     function onSubmit(data) {
         console.log("Form was Submitted", data);
     }
+    function handelBack(){
+navigate(-1)
+    }
     return (
+        <>
+        <button onClick={handelBack}>
+            Go To Back
+
+        </button>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <label> First Name:</label>
@@ -35,6 +45,7 @@ console.log(firstName);
             </div>
             <input disabled={!isDirty||!isValid}type="submit" />
         </form>
+        </>
     )
 }
 
