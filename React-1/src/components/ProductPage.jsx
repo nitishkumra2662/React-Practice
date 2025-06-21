@@ -40,7 +40,7 @@ function handelBack() {
         <img
           src={product.thumbnail}
           alt={product.title}
-          style={{ width: '50%', height: '250x', objectFit: 'cover' }}
+          style={{ width: '50%', height: '250px', objectFit: 'cover' }}
         /></div>
       <ul>
         <li>Title: {product.title}</li>
@@ -48,7 +48,7 @@ function handelBack() {
         <li>category: {product.category}</li>
         <li>rating:{product.rating}</li>
         <li>Price:$ {product.price}</li>
-        <li>Description; {product.description}</li>
+        <li>Description: {product.description}</li>
       </ul>
 
     </div>
