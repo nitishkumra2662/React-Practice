@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import styled from "styled-components"
 
 
 
 const ProductPage = () => {
+  const Btn = styled.button`
+  color: yellow;
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: black;
+  cursor: pointer;
+  margin-top: 20px;
+`
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -31,10 +42,10 @@ function handelBack() {
   return (
     <div>
 
-       <button onClick={handelBack}>
+       <Btn onClick={handelBack}>
                 Go To Back
 
-            </button>
+            </Btn>
       <h1> Product Title</h1>
       <div>
         <img
