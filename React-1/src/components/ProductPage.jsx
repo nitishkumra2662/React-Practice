@@ -2,19 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components"
+import {Button} from "@mui/material";
 
 
 
 const ProductPage = () => {
-  const Btn = styled.button`
-  color: yellow;
-  border: 1px solid green;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: black;
-  cursor: pointer;
-  margin-top: 20px;
-`
+  
 
   const navigate = useNavigate();
 
@@ -41,11 +34,16 @@ function handelBack() {
 
   return (
     <div>
+      <Button
+          variant="contained"
+          color="primary"
+          onClick={handelBack}
+          sx={{ mt: 3 }}
+        >
+          Go Back To Home
+        </Button>
 
-       <Btn onClick={handelBack}>
-                Go To Back
-
-            </Btn>
+       
       <h1> Product Title</h1>
       <div>
         <img

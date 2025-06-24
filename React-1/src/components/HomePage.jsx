@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import styled from "styled-components"
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import useDebouncedValue from '../hooks/useDebouncedValue';
+
+
 
 const HomePage = () => {
     const [productsData, setProductsData] = useState([]);
     const [searchData, setSearchData] = useState();
-    const Heading=styled.h1`
-      color:red;
-      border:1px solid green;
-      border-radius:5px;
-      padding:10px`
+    const debouncedSearch = useDebouncedValue(searchData, 600);
 
-      const Heading2=styled.h2`
-      color:blue;
-      padding:10px`
-    
 
     useEffect(() => {
         getProductsData();
     }, [])
 
+
     useEffect(() => {
         searchProductsData();
-    }, [searchData])
+    }, [debouncedSearch]);
+
 
     async function getProductsData() {
         const url = 'https://dummyjson.com/products'
@@ -31,9 +30,9 @@ const HomePage = () => {
         console.log(data);
         setProductsData(data.products)
     }
-const searchValue=localStorage.getItem("search")
+    const searchValue = localStorage.getItem("search")
     async function searchProductsData() {
-        const searchQuery=searchData||searchValue
+        const searchQuery = searchData || searchValue
         const url = `https://dummyjson.com/products/search?q=${searchQuery.toLowerCase()}`
         const response = await fetch(url);
         const data = await response.json()
@@ -44,25 +43,24 @@ const searchValue=localStorage.getItem("search")
 
     return (
         <>
-            <div>
-                
-                <Heading> Hello Eyeryone</Heading>
-                <Heading2>Home Page</Heading2>
-                <h1>
+            <Container maxWidth="md">
+
+                <Typography color="secondary" variant="contained" component="h1">
+                    Hello Everyone
+                </Typography>
+                <Typography
+                    variant="subtitle1"
+                    color="text.secondary"> Welcome to the Home Page</Typography>
+                <Typography variant="h5" component="h1" color="primary">
                     Products Informations
-                </h1>
-                <input onChange={(event) =>{
-                    localStorage.setItem("search",event.target.value)
-                    setSearchData(event.target.value)} }type="text" value={searchData} placeholder="Search product" />
+                </Typography>
+                <input onChange={(event) => {
+                    localStorage.setItem("search", event.target.value)
+                    setSearchData(event.target.value)
+                }} type="text" value={searchData} placeholder="Search product" />
                 {
                     productsData && productsData.map((product, index) => (
-                        <div key={index} style={{
-                            border: '1px solid #ccc',
-                            margin: '10px',
-                            padding: '10px',
-                            borderRadius: '10px',
-                            width: '300px'
-                        }}>
+                        <Paper key={index} elevation={3} sx={{ p: 2, mb: 2 }}>
 
                             <img
                                 src={product.thumbnail}
@@ -76,12 +74,12 @@ const searchValue=localStorage.getItem("search")
                                     <li>Price:$ {product.price}</li>
                                 </ul>
                             </Link>
-                        </div>
+                        </Paper>
                     ))
 
                 }
-                <Heading> Thankyou Visit Again</Heading>
-            </div>
+                <h1> Thankyou Visit Again</h1>
+            </Container>
         </>
     )
 }
