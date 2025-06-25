@@ -5,6 +5,7 @@ import HomePage from './components/HomePage'
 
 import ProductPage from './components/ProductPage'
 import PageNotFound from './components/PageNotFound';
+import AddToCartPage from './components/AddToCartPage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,7 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="*" element={<PageNotFound />} />
-          
+          <Route path="/cart" element={<AddToCartPage />}/>
         </Routes>
         
         
