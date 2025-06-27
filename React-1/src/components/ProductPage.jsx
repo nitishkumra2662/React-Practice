@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import styled from "styled-components"
-import {Button} from "@mui/material";
-
-
 
 const ProductPage = () => {
-  
-
-  const navigate = useNavigate();
 
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -28,22 +20,9 @@ const ProductPage = () => {
   if (!product) {
     return <p>Loading...</p>;
   }
-function handelBack() {
-        navigate(-1)
-    }
 
   return (
     <div>
-      <Button
-          variant="contained"
-          color="primary"
-          onClick={handelBack}
-          sx={{ mt: 3 }}
-        >
-          Go Back To Home
-        </Button>
-
-       
       <h1> Product Title</h1>
       <div>
         <img

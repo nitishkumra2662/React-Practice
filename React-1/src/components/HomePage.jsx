@@ -3,17 +3,14 @@ import { Link } from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import useDebouncedValue from '../hooks/useDebouncedValue';
-import HomeIcon from '@mui/icons-material/Home';
-import ShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useCartStore } from '../store/useCartStore'; 
-import { Grid, Card, CardContent, CardMedia, Button } from '@mui/material';
+import { useCartStore } from '../store/useCartStore';
+import { Grid, Card, CardContent, CardMedia, Button ,Stack} from '@mui/material';
 
 const HomePage = () => {
     const [productsData, setProductsData] = useState([]);
     const [searchData, setSearchData] = useState();
     const [sortOption, setSortOption] = useState('');
     const addToCart = useCartStore((state) => state.addToCart);
-
     const debouncedSearch = useDebouncedValue(searchData, 600);
 
     useEffect(() => {
@@ -55,20 +52,9 @@ const HomePage = () => {
 
     });
     return (
-        <>
-            <Container maxWidth="lg">
-
-                <Typography color="secondary" variant="h1" component="h1">
-                    Hello Everyone
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                    <HomeIcon sx={{ verticalAlign: 'middle', mr: 1 }} />
-                    Welcome to the Home Page
-                </Typography>
-
-                <Typography variant="h5" component="h1" color="primary">
-                    Products Informations
-                </Typography>
+        
+            <Stack maxWidth="lg" mt={8}  justifyContent="center">
+                
                 <select onChange={(event) => setSortOption(event.target.value)} value={sortOption}>
                     <option value="">Sort By</option>
                     <option value="priceLowHigh">Price: Low to High</option>
@@ -81,15 +67,7 @@ const HomePage = () => {
                     localStorage.setItem("search", event.target.value)
                     setSearchData(event.target.value)
                 }} type="text" value={searchData} placeholder="Search product" />
-                <Link to="/cart">
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        startIcon={<ShoppingCartIcon />}
-                    >
-                        View Cart
-                    </Button>
-                </Link>
+
                 <Grid container spacing={3}>
                     {sortedProducts && sortedProducts.map((product, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
@@ -130,23 +108,16 @@ const HomePage = () => {
                                         color="secondary"
                                         fullWidth
                                         sx={{ mt: 1 }}
-                                        onClick={() => addToCart(product)}
-
-                                    >
+                                        onClick={() => addToCart(product)}>
                                         Add to Cart
                                     </Button>
                                 </CardContent>
                             </Card>
                         </Grid>
                     ))}
-                </Grid>
-
-                <Typography variant="h6" sx={{ mt: 4 }} color="text.secondary">
-                    Thank you! Visit Again.
-                </Typography>
-            </Container>
-        </>
+                </Grid>  
+            </Stack>
+        
     )
 }
-
 export default HomePage;
